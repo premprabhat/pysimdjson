@@ -119,9 +119,10 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             arm64v8/ubuntu \
-            bash -exc ' apt-get update && apt-get -y install python3.8 python3.8-pip && \
-            python3.8 -m venv .env && \
+            bash -exc ' apt-get update && apt-get -y install python3 python3-pip && \
+            python3 -m venv .env && \
             source .env/bin/activate && \
+            python --version && \
             export BUILD_WITH_CYTHON=1 && export BUILD_FOR_DEBUG=1 && \
             python -m pip install --upgrade pip wheel && \
             pip install cython && \
