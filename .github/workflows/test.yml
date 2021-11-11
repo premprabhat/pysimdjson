@@ -109,7 +109,7 @@ jobs:
             ${{ env.img }} \
             bash -exc '${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
-            yum -y install build-essential clang-6.0 && \
+            yum -y install clang-6.0 && \
             export BUILD_WITH_CYTHON=1 && export BUILD_FOR_DEBUG=1 && \
             python -m pip install --upgrade pip wheel && \
             pip install cython && \
@@ -146,7 +146,7 @@ jobs:
             ${{ env.img }} \
             bash -exc '${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
-            yum -y install build-essential clang-6.0 && \
+            yum -y install clang-6.0 && \
             export BUILD_WITH_CYTHON=1 && \
             python -m pip install --upgrade pip wheel && \
             pip install cython && \
