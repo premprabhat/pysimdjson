@@ -99,6 +99,22 @@ jobs:
       id: qemu
       uses: docker/setup-qemu-action@v1
 
+    - name: Running tests with pytest on x86
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+            quay.io/pypa/manylinux2014_x86_64 \
+            bash -exc '${{ env.py }} -m venv .env && \
+            source .env/bin/activate && \
+            export BUILD_WITH_CYTHON=1 && export BUILD_FOR_DEBUG=1 && \
+            python -m pip install --upgrade pip wheel && \
+            pip install cython && \
+            pip install -e '.[test]' && \
+            rm simdjson/csimdjson.cpp && \
+            python setup.py develop && \
+            coverage run -m pytest && \
+            coverage report -m && \
+            flake8 && \
+            deactivate'
     - name: Running tests with pytest
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
